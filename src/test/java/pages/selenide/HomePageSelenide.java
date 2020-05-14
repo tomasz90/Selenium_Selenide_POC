@@ -30,6 +30,7 @@ public class HomePageSelenide implements HomePage {
 
     private ElementsCollection devCategoryButtons = $$(".categories .category-wrapper h3");
     
+    @Override
     public void navigate() {
         open("http://esc.tt.com.pl/");
         if (acceptCookieButton.isDisplayed()) {
@@ -37,12 +38,14 @@ public class HomePageSelenide implements HomePage {
         }
     }
 
+    @Override
     public void searchForDev(String tech, String location) {
         techField.setValue(tech);
         locationField.setValue(location);
         searchButton.click();
     }
 
+    @Override
     public void searchForDevInCategory(String category) {
         devCategoryButtons.stream()
                 .filter(element -> element.getText().equals(category))
@@ -52,6 +55,7 @@ public class HomePageSelenide implements HomePage {
                 .click();
     }
 
+    @Override
     public void signIn(String email, String password) {
         signInButton.click();
         emailField.setValue(email);
@@ -59,21 +63,25 @@ public class HomePageSelenide implements HomePage {
         submitSignInButton.click();
     }
 
+    @Override
     public void signInWithoutUI() {
         WebStorage webStorage = (WebStorage) new Augmenter().augment(WebDriverRunner.getWebDriver());
         webStorage.getLocalStorage().setItem("token", TOKEN_VALUE);
         refresh();
     }
 
+    @Override
     public void signOut() {
         profileButton.click();
         signOutButton.click();
     }
 
+    @Override
     public void userProfileIconIs(Condition condition) {
         profileButton.shouldBe(condition);
     }
 
+    @Override
     public void addExpert() {
         addExpertsButton.click();
     }

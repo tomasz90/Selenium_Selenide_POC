@@ -24,11 +24,13 @@ public class AddExpertFormSelenide implements AddExpertForm {
 
     private Condition clickable = and("can be clicked", visible, enabled);
 
+    @Override
     public void skipSection(String section) {
         nextButton.shouldBe(clickable).click();
         $(withText(section)).waitUntil(hidden, DEFAULT_WAIT);
     }
 
+    @Override
     public void fillRequiredBasics(String position, String name) {
         positionField.setValue(position);
         nameField.setValue(name);
@@ -36,15 +38,18 @@ public class AddExpertFormSelenide implements AddExpertForm {
         skipSection("Basic data");
     }
 
+    @Override
     public void fillRequiredSkills(String skill) {
         mainSkillsField.setValue(skill).pressEnter();
         nextButton.click();
     }
 
+    @Override
     public void share() {
         shareButton.click();
     }
 
+    @Override
     public void expertShouldBeShared() {
         sharedSuccessfullyMessage.isDisplayed();
     }
