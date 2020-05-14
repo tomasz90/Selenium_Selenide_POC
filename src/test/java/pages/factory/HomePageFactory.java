@@ -1,8 +1,11 @@
 package pages.factory;
 
+import org.openqa.selenium.support.PageFactory;
 import pages.factory.model.HomePage;
 import pages.selenide.HomePageSelenide;
 import pages.selenium.HomePageSelenium;
+
+import static pages.selenium.BasePage.getDriver;
 
 public class HomePageFactory {
 
@@ -11,7 +14,7 @@ public class HomePageFactory {
             case "selenide":
                 return new HomePageSelenide();
             case "selenium":
-                return new HomePageSelenium();
+                return PageFactory.initElements(getDriver(), HomePageSelenium.class);
         }
         return null;
     }

@@ -6,7 +6,6 @@ import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.remote.Augmenter;
-import pages.factory.HomePageFactory;
 import pages.factory.model.HomePage;
 
 import static com.codeborne.selenide.Selectors.byId;

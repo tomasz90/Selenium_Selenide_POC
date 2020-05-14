@@ -1,60 +1,87 @@
 package pages.selenium;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.html5.WebStorage;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.factory.model.HomePage;
 
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selenide.*;
+import java.util.List;
+
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.refresh;
 import static tests.Constants.TOKEN_VALUE;
 
-public class HomePageSelenium implements HomePage {
+public class HomePageSelenium extends BasePage implements HomePage {
+    
+    @FindBy(css = "esc-cookie-alert button")
+    private WebElement acceptCookieButton;
 
-    private SelenideElement acceptCookieButton = $("esc-cookie-alert button");
-    private SelenideElement searchButton = $("[type=submit]");
-    private SelenideElement signInButton = $("nav .navbar-link:nth-child(4)");
-    private SelenideElement submitSignInButton = $("esc-login [type=submit]");
-    private SelenideElement signOutButton = $("button.btn-logout");
-    private SelenideElement profileButton = $("esc-nav-bar-desktop-dropdown button img");
-    private SelenideElement addExpertsButton = $(".btn[ng-reflect-authorities=MODIFY_EXPERTS]");
+    @FindBy(css = "[type=submit]")
+    private WebElement searchButton;
+    
+    @FindBy(css = "nav .navbar-link:nth-child(4)")
+    private WebElement signInButton;
+    
+    @FindBy(css = "esc-login [type=submit]")
+    private WebElement submitSignInButton;
+    
+    @FindBy(css = "button.btn-logout")
+    private WebElement signOutButton;
+    
+    @FindBy(css = "esc-nav-bar-desktop-dropdown button img")
+    private WebElement profileButton;
+    
+    @FindBy(css = ".btn[ng-reflect-authorities=MODIFY_EXPERTS]")
+    private WebElement addExpertsButton;
 
-    private SelenideElement techField = $(byId("who-search"));
-    private SelenideElement locationField = $(byId("where-search"));
-    private SelenideElement emailField = $(byId("email"));
-    private SelenideElement passwordField = $(byId("password"));
+    @FindBy(id = "who-search")
+    private WebElement techField;
+    
+    @FindBy(id = "where-search")
+    private WebElement locationField;
+    
+    @FindBy(id = "email")
+    private WebElement emailField;
+    
+    @FindBy(id = "password")
+    private WebElement passwordField;
 
-    private ElementsCollection devCategoryButtons = $$(".categories .category-wrapper h3");
+    @FindBy(css = ".categories .category-wrapper h3")
+    private List<WebElement> devCategoryButtons;
 
     public void navigate() {
-        open("http://esc.tt.com.pl/");
+        getDriver().navigate().to("http://esc.tt.com.pl/");
         if (acceptCookieButton.isDisplayed()) {
             acceptCookieButton.click();
         }
     }
 
     public void searchForDev(String tech, String location) {
-        techField.setValue(tech);
-        locationField.setValue(location);
+        techField.sendKeys(tech);
+        locationField.sendKeys(location);
         searchButton.click();
     }
 
     public void searchForDevInCategory(String category) {
-        devCategoryButtons.stream()
+        WebElement categoryButton = devCategoryButtons.stream()
                 .filter(element -> element.getText().equals(category))
                 .findAny()
-                .get()
-                .scrollIntoView(false)
-                .click();
+                .get();
+
+        Actions actions = new Actions(getDriver());
+        actions.moveToElement(categoryButton);
+        categoryButton.click();
     }
 
     public void signIn(String email, String password) {
         signInButton.click();
-        emailField.setValue(email);
-        passwordField.setValue(password);
+        emailField.sendKeys(email);
+        passwordField.sendKeys(password);
         submitSignInButton.click();
     }
 
@@ -70,7 +97,8 @@ public class HomePageSelenium implements HomePage {
     }
 
     public void userProfileIconIs(Condition condition) {
-        profileButton.shouldBe(condition);
+      //  profileButton.shouldBe(condition);
+        getWait(3).until(ExpectedConditions.visibilityOf(profileButton));
     }
 
     public void addExpert() {

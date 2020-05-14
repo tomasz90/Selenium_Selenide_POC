@@ -14,7 +14,7 @@ import static tests.Util.makeUnique
 
 class ExampleSpec extends Specification {
 
-    private String library = "selenide"
+    private String library = "selenium"
     
     private HomePage homePage = HomePageFactory.get(library)
     private ResultPage resultPage = ResultPageFactory.get(library)
