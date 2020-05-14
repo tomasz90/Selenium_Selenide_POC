@@ -7,6 +7,7 @@ import pages.factory.ResultPageFactory
 import pages.factory.model.AddExpertForm
 import pages.factory.model.HomePage
 import pages.factory.model.ResultPage
+import pages.selenium.BasePage
 import spock.lang.Specification
 
 import static com.codeborne.selenide.Condition.visible
@@ -14,8 +15,8 @@ import static tests.Util.makeUnique
 
 class ExampleSpec extends Specification {
 
-    private String library = "selenium"
-    
+    private static String library = "selenium"
+
     private HomePage homePage = HomePageFactory.get(library)
     private ResultPage resultPage = ResultPageFactory.get(library)
     private AddExpertForm addExpertForm = AddExpertFormFactory.get(library)
@@ -25,6 +26,12 @@ class ExampleSpec extends Specification {
     def setup() {
         homePage.navigate()
     }
+
+    def cleanupSpec() {
+        if (library == "selenium") {
+        BasePage.close()
+    }
+}
 
     def "Should find some devs when providing valid tech and location"() {
         when:

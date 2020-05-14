@@ -2,9 +2,13 @@ package pages.selenium;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static util.Constants.DEFAULT_WAIT;
 
 public abstract class BasePage extends PageFactory {
 
@@ -19,9 +23,13 @@ public abstract class BasePage extends PageFactory {
         return driver;
     }
 
-    static void close() {
+    public static void close() {
         getDriver().close();
         driver = null;
+    }
+    
+    public WebElement waitUntilVisible(WebElement element) {
+       return getWait(DEFAULT_WAIT).until(ExpectedConditions.visibilityOf(element));
     }
 
     static WebDriverWait getWait(int timeOutInMilliSec) {

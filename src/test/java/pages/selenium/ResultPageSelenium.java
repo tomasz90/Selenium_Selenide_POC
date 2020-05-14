@@ -29,7 +29,7 @@ public class ResultPageSelenium extends BasePage implements ResultPage {
     @Override
     public void resultsAre(Condition condition) {
         if(condition == visible) {
-            getWait(3).until(ExpectedConditions.visibilityOf(searchResults));
+            waitUntilVisible(searchResults);
         } else {
             getWait(3).until(ExpectedConditions.not(ExpectedConditions.presenceOfElementLocated(By.cssSelector("esc-search-expert-list-item > .row"))));
         }

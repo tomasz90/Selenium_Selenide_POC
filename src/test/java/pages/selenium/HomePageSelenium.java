@@ -15,6 +15,7 @@ import java.util.List;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.refresh;
 import static tests.Constants.TOKEN_VALUE;
+import static util.Constants.DEFAULT_WAIT;
 
 public class HomePageSelenium extends BasePage implements HomePage {
     
@@ -56,8 +57,8 @@ public class HomePageSelenium extends BasePage implements HomePage {
 
     public void navigate() {
         getDriver().navigate().to("http://esc.tt.com.pl/");
-        if (acceptCookieButton.isDisplayed()) {
-            acceptCookieButton.click();
+        if (acceptCookieButton != null) {
+           acceptCookieButton.click();
         }
     }
 
@@ -86,9 +87,9 @@ public class HomePageSelenium extends BasePage implements HomePage {
     }
 
     public void signInWithoutUI() {
-        WebStorage webStorage = (WebStorage) new Augmenter().augment(WebDriverRunner.getWebDriver());
+        WebStorage webStorage = (WebStorage) new Augmenter().augment(getDriver());
         webStorage.getLocalStorage().setItem("token", TOKEN_VALUE);
-        refresh();
+        navigate();
     }
 
     public void signOut() {
@@ -97,8 +98,7 @@ public class HomePageSelenium extends BasePage implements HomePage {
     }
 
     public void userProfileIconIs(Condition condition) {
-      //  profileButton.shouldBe(condition);
-        getWait(3).until(ExpectedConditions.visibilityOf(profileButton));
+        getWait(DEFAULT_WAIT).until(ExpectedConditions.visibilityOf(profileButton));
     }
 
     public void addExpert() {
