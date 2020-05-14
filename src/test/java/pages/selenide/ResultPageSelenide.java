@@ -2,12 +2,12 @@ package pages.selenide;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import pages.AbstractResultPage;
+import pages.factory.model.ResultPage;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
-public class ResultPage extends AbstractResultPage {
+public class ResultPageSelenide implements ResultPage {
     
     private SelenideElement clearFiltersButton = $(".btn-filter span.lnr-cross");
     private SelenideElement searchForm = $("esc-search-expert .container");

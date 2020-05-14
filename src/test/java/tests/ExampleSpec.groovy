@@ -1,9 +1,12 @@
 package tests
 
 import com.codeborne.selenide.Condition
-import pages.AbstractAddExpertForm
-import pages.AbstractHomePage
-import pages.AbstractResultPage
+import pages.factory.AddExpertFormFactory
+import pages.factory.HomePageFactory
+import pages.factory.ResultPageFactory
+import pages.factory.model.AddExpertForm
+import pages.factory.model.HomePage
+import pages.factory.model.ResultPage
 import spock.lang.Specification
 
 import static com.codeborne.selenide.Condition.visible
@@ -13,9 +16,9 @@ class ExampleSpec extends Specification {
 
     private String library = "selenide"
     
-    private AbstractHomePage homePage = AbstractHomePage.get(library)
-    private AbstractResultPage resultPage = AbstractResultPage.get(library)
-    private AbstractAddExpertForm addExpertForm = AbstractAddExpertForm.get(library)
+    private HomePage homePage = HomePageFactory.get(library)
+    private ResultPage resultPage = ResultPageFactory.get(library)
+    private AddExpertForm addExpertForm = AddExpertFormFactory.get(library)
 
     private Condition notVisible = Condition.hidden
 

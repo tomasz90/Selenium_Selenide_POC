@@ -2,14 +2,14 @@ package pages.selenide;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import pages.AbstractAddExpertForm;
+import pages.factory.model.AddExpertForm;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static util.Constants.DEFAULT_WAIT;
 
-public class AddExpertForm extends AbstractAddExpertForm {
+public class AddExpertFormSelenide implements AddExpertForm {
 
     private SelenideElement positionField = $(byId("position"));
     private SelenideElement nameField = $(byId("displayedName"));
