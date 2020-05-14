@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'groovy'
 }
 
 group 'selenide-example'
@@ -13,5 +14,8 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile 'org.codehaus.groovy:groovy-all:2.3.11'
     testCompile 'com.codeborne:selenide:5.11.1'
+    testCompile "org.spockframework:spock-core:1.1-groovy-2.4-rc-2"
+    testCompile group: 'net.bytebuddy', name: 'byte-buddy-dep', version: '1.10.10'
 }
