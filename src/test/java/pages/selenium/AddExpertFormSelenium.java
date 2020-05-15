@@ -36,16 +36,19 @@ public class AddExpertFormSelenium extends BasePage implements AddExpertForm {
         getWait(DEFAULT_WAIT)
                 .until(ExpectedConditions.elementToBeClickable(nextButton))
                 .click();
-        WebElement sectionElement = getDriver().findElement(By.xpath("//*[text()='" + section + "']"));
-        getWait(DEFAULT_WAIT)
-                .until(ExpectedConditions.invisibilityOf(sectionElement));
+        WebElement sectionElement = getDriver().findElement(By.cssSelector("[class=\"d-md-inline h5 ng-star-inserted\"]"));
+        if(sectionElement.getText().equals(section)) {
+            getWait(DEFAULT_WAIT)
+                    .until(ExpectedConditions.invisibilityOf(sectionElement));
+        }
     }
 
     @Override
     public void fillRequiredBasics(String position, String name) {
-        positionField.sendKeys(position);
+        getWait(DEFAULT_WAIT).until(ExpectedConditions.visibilityOf(positionField)).sendKeys(position);
         nameField.sendKeys(name);
-        getWait(DEFAULT_WAIT).until(ExpectedConditions.invisibilityOf(nameField));
+        WebElement loader = getWait(DEFAULT_WAIT).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".addon.loader")));
+        getWait(DEFAULT_WAIT).until(ExpectedConditions.invisibilityOf(loader));
         skipSection("Basic data");
     }
 

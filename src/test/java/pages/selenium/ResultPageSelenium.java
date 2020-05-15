@@ -7,8 +7,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.factory.model.ResultPage;
 
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static util.Constants.DEFAULT_WAIT;
+import static util.Constants.SHORT_WAIT;
 
 public class ResultPageSelenium extends BasePage implements ResultPage {
 
@@ -17,9 +20,8 @@ public class ResultPageSelenium extends BasePage implements ResultPage {
 
     @FindBy(css = "esc-search-expert .container")
     private WebElement searchForm;
-
-    @FindBy(css = "esc-search-expert-list-item > .row")
-    private WebElement searchResults;
+    
+    private By searchResults = By.cssSelector("esc-search-expert-list-item > .row");
 
     @Override
     public void isLoaded() {
@@ -28,10 +30,12 @@ public class ResultPageSelenium extends BasePage implements ResultPage {
 
     @Override
     public void resultsAre(Condition condition) {
-        if(condition == visible) {
-            waitUntilVisible(searchResults);
+        WebElement profile = findElementQuietly(searchResults, SHORT_WAIT);
+        boolean shouldBeVisible = condition == visible;
+        if (shouldBeVisible) {
+            assertNotNull(profile);
         } else {
-            getWait(3).until(ExpectedConditions.not(ExpectedConditions.presenceOfElementLocated(By.cssSelector("esc-search-expert-list-item > .row"))));
+            assertNull(profile);
         }
     }
 

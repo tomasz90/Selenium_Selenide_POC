@@ -1,26 +1,25 @@
 package pages.selenium;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.WebDriverRunner;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.factory.model.HomePage;
 
 import java.util.List;
 
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Condition.visible;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static tests.Constants.TOKEN_VALUE;
-import static util.Constants.DEFAULT_WAIT;
+import static util.Constants.SHORT_WAIT;
 
 public class HomePageSelenium extends BasePage implements HomePage {
     
-    @FindBy(css = "esc-cookie-alert button")
-    private WebElement acceptCookieButton;
+    private By acceptCookieButton = By.cssSelector("esc-cookie-alert button");
 
     @FindBy(css = "[type=submit]")
     private WebElement searchButton;
@@ -34,8 +33,7 @@ public class HomePageSelenium extends BasePage implements HomePage {
     @FindBy(css = "button.btn-logout")
     private WebElement signOutButton;
     
-    @FindBy(css = "esc-nav-bar-desktop-dropdown button img")
-    private WebElement profileButton;
+    private By profileButton = By.cssSelector("esc-nav-bar-desktop-dropdown button img");
     
     @FindBy(css = ".btn[ng-reflect-authorities=MODIFY_EXPERTS]")
     private WebElement addExpertsButton;
@@ -57,8 +55,9 @@ public class HomePageSelenium extends BasePage implements HomePage {
 
     public void navigate() {
         getDriver().navigate().to("http://esc.tt.com.pl/");
-        if (acceptCookieButton != null) {
-           acceptCookieButton.click();
+        WebElement accept = findElementQuietly(acceptCookieButton, 1);
+        if (accept != null) {
+           accept.click();
         }
     }
 
@@ -93,12 +92,18 @@ public class HomePageSelenium extends BasePage implements HomePage {
     }
 
     public void signOut() {
-        profileButton.click();
+        getDriver().findElement(profileButton).click();
         signOutButton.click();
     }
 
     public void userProfileIconIs(Condition condition) {
-        getWait(DEFAULT_WAIT).until(ExpectedConditions.visibilityOf(profileButton));
+        WebElement profile = findElementQuietly(profileButton, SHORT_WAIT);
+        boolean shouldBeVisible = condition == visible;
+        if (shouldBeVisible) {
+            assertNotNull(profile);
+        } else {
+            assertNull(profile);
+        }
     }
 
     public void addExpert() {
