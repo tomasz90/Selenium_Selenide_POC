@@ -34,7 +34,7 @@ public class AddExpertFormSelenium extends BasePageSelenium implements AddExpert
     @FindBy(css = "esc-expert-share .container h2") 
     private WebElement sharedSuccessfullyMessage;
 
-    @FindBy(css = "[class=\"d-md-inline h5 ng-star-inserted\"]")
+    @FindBy(css = ".d-md-inline.h5.ng-star-inserted")
     private WebElement sectionElement;
 
     @Override

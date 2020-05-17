@@ -18,7 +18,7 @@ class ExampleSpec extends Specification {
     private static final String SELENIUM = "selenium"
     private static final String SELENIDE = "selenide"
     
-    private static final String LIBRARY = SELENIDE
+    private static final String LIBRARY = SELENIUM
 
     private HomePage homePage = HomePageFactory.get(LIBRARY)
     private ResultPage resultPage = ResultPageFactory.get(LIBRARY)
