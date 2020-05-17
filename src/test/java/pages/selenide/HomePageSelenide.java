@@ -10,6 +10,7 @@ import pages.factory.model.HomePage;
 
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selenide.*;
+import static tests.Constants.TOKEN;
 import static tests.Constants.TOKEN_VALUE;
 
 public class HomePageSelenide implements HomePage {
@@ -65,7 +66,7 @@ public class HomePageSelenide implements HomePage {
     @Override
     public void signInWithoutUI() {
         WebStorage webStorage = (WebStorage) new Augmenter().augment(WebDriverRunner.getWebDriver());
-        webStorage.getLocalStorage().setItem("token", TOKEN_VALUE);
+        webStorage.getLocalStorage().setItem(TOKEN, TOKEN_VALUE);
         refresh();
     }
 

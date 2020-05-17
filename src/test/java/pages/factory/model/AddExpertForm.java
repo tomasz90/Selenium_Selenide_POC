@@ -10,6 +10,6 @@ public interface AddExpertForm {
 
      void share();
 
-     void expertShouldBeShared();
+     boolean expertShouldBeShared();
     
 }

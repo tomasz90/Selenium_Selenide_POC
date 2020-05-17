@@ -49,7 +49,7 @@ public class AddExpertFormSelenium extends BasePageSelenium implements AddExpert
     public void fillRequiredBasics(String position, String name) {
         waitUntilVisible(positionField, DEFAULT_WAIT).sendKeys(position);
         nameField.sendKeys(name);
-        WebElement loaderElement = waitUntilPresence(loader, DEFAULT_WAIT);
+        WebElement loaderElement = waitUntilPreset(loader, DEFAULT_WAIT);
         waitUntilHidden(loaderElement, DEFAULT_WAIT);
         skipSection("Basic data");
     }
@@ -66,8 +66,8 @@ public class AddExpertFormSelenium extends BasePageSelenium implements AddExpert
     }
 
     @Override
-    public void expertShouldBeShared() {
+    public boolean expertShouldBeShared() {
         waitUntilVisible(sharedSuccessfullyMessage, DEFAULT_WAIT);
-        assertEquals("You shared expert successfully", sharedSuccessfullyMessage.getText());
+        return sharedSuccessfullyMessage.getText().equals("You shared expert successfully");
     }
 }

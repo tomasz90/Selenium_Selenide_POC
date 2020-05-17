@@ -50,7 +50,7 @@ public class AddExpertFormSelenide implements AddExpertForm {
     }
 
     @Override
-    public void expertShouldBeShared() {
-        sharedSuccessfullyMessage.isDisplayed();
+    public boolean expertShouldBeShared() {
+        return sharedSuccessfullyMessage.waitUntil(visible, DEFAULT_WAIT) != null;
     }
 }

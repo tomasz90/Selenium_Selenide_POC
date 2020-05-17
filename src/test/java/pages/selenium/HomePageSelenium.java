@@ -14,6 +14,7 @@ import java.util.List;
 import static com.codeborne.selenide.Condition.visible;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static tests.Constants.TOKEN;
 import static tests.Constants.TOKEN_VALUE;
 import static util.Constants.DEFAULT_WAIT;
 import static util.Constants.SHORT_WAIT;
@@ -87,7 +88,7 @@ public class HomePageSelenium extends BasePageSelenium implements HomePage {
 
     public void signInWithoutUI() {
         WebStorage webStorage = (WebStorage) new Augmenter().augment(getDriver());
-        webStorage.getLocalStorage().setItem("token", TOKEN_VALUE);
+        webStorage.getLocalStorage().setItem(TOKEN, TOKEN_VALUE);
         navigate();
     }
 
@@ -107,6 +108,6 @@ public class HomePageSelenium extends BasePageSelenium implements HomePage {
     }
 
     public void addExpert() {
-        waitUntilPresence(addExpertsButton, DEFAULT_WAIT).click();
+        waitUntilPreset(addExpertsButton, DEFAULT_WAIT).click();
     }
 }
