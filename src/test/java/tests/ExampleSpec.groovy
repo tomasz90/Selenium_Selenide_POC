@@ -33,7 +33,7 @@ class ExampleSpec extends Specification {
         BasePageSelenium.close()
     }
 }
-
+    
     def "Should find some devs when providing valid tech and location"() {
         when:
         homePage.searchForDev("java", "Warszawa, Poland")
