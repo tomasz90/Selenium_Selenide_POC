@@ -12,12 +12,11 @@ import pages.factory.model.HomePage;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.visible;
+import static constants.Constants.*;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static tests.Constants.TOKEN;
 import static tests.Constants.TOKEN_VALUE;
-import static constants.Constants.DEFAULT_WAIT;
-import static constants.Constants.SHORT_WAIT;
 
 public class HomePageSelenium extends BasePageSelenium implements HomePage {
     
@@ -54,9 +53,19 @@ public class HomePageSelenium extends BasePageSelenium implements HomePage {
 
     public void navigate() {
         getDriver().navigate().to("http://esc.tt.com.pl/");
+    }
+    
+    @Override
+    public void prepareCleanState() {
+        WebStorage webStorage = (WebStorage) new Augmenter().augment(getDriver());
+        String tokenValue = webStorage.getLocalStorage().getItem(TOKEN);
+        if(tokenValue != null) {
+            webStorage.getLocalStorage().removeItem(TOKEN);
+            getDriver().navigate().refresh();
+        }
         WebElement accept = findElementQuietly(acceptCookieButton, 500);
         if (accept != null) {
-           accept.click();
+            accept.click();
         }
     }
 
@@ -106,6 +115,6 @@ public class HomePageSelenium extends BasePageSelenium implements HomePage {
     }
 
     public void addExpert() {
-        waitUntilPreset(addExpertsButton, DEFAULT_WAIT).click();
+        waitUntilPresent(addExpertsButton, LONG_WAIT).click();
     }
 }

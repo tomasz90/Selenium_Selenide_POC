@@ -6,6 +6,8 @@ public interface HomePage {
 
      void navigate();
 
+     void prepareCleanState();
+
      void searchForDev(String tech, String location);
 
      void searchForDevInCategory(String category);

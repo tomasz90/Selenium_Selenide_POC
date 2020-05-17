@@ -35,7 +35,7 @@ public abstract class BasePageSelenium extends PageFactory {
         getWait(timeOutInMs).until(ExpectedConditions.invisibilityOf(element));
     }
 
-    protected WebElement waitUntilPreset(By by, int timeOutInMs) {
+    protected WebElement waitUntilPresent(By by, int timeOutInMs) {
         return getWait(timeOutInMs).until(ExpectedConditions.presenceOfElementLocated(by));
     }
 

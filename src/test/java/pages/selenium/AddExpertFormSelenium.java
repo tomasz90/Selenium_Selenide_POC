@@ -48,7 +48,7 @@ public class AddExpertFormSelenium extends BasePageSelenium implements AddExpert
     public void fillRequiredBasics(String position, String name) {
         waitUntilVisible(positionField, DEFAULT_WAIT).sendKeys(position);
         nameField.sendKeys(name);
-        WebElement loaderElement = waitUntilPreset(loader, DEFAULT_WAIT);
+        WebElement loaderElement = waitUntilPresent(loader, DEFAULT_WAIT);
         waitUntilHidden(loaderElement, DEFAULT_WAIT);
         skipSection("Basic data");
     }

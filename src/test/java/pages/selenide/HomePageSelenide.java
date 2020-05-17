@@ -33,6 +33,16 @@ public class HomePageSelenide implements HomePage {
     @Override
     public void navigate() {
         open("http://esc.tt.com.pl/");
+    }
+
+    @Override
+    public void prepareCleanState() {
+        WebStorage webStorage = (WebStorage) new Augmenter().augment(WebDriverRunner.getWebDriver());
+        String tokenValue = webStorage.getLocalStorage().getItem(TOKEN);
+        if(tokenValue != null) {
+            webStorage.getLocalStorage().removeItem(TOKEN);
+            refresh();
+        }
         if (acceptCookieButton.isDisplayed()) {
             acceptCookieButton.click();
         }

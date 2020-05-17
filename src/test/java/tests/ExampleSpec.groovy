@@ -12,10 +12,11 @@ import spock.lang.Specification
 
 import static com.codeborne.selenide.Condition.visible
 import static constants.Constants.SELENIDE
+import static constants.Constants.SELENIUM
 import static tests.Util.makeUnique
 
 class ExampleSpec extends Specification {
-    
+
     private static final String LIBRARY = SELENIDE
 
     private HomePage homePage = HomePageFactory.get(LIBRARY)
@@ -26,14 +27,16 @@ class ExampleSpec extends Specification {
 
     def setup() {
         homePage.navigate()
+        homePage.prepareCleanState()
     }
 
     def cleanupSpec() {
-        if (LIBRARY == "selenium") {
+        if (LIBRARY == SELENIUM) {
         BasePageSelenium.close()
+        }
     }
-}
     
+    @Repeat
     def "Should find some devs when providing valid tech and location"() {
         when:
         homePage.searchForDev("java", "Warszawa, Poland")
@@ -43,6 +46,7 @@ class ExampleSpec extends Specification {
         resultPage.resultsAre(visible)
     }
 
+    @Repeat
     def "Should find some devs after clearing filters on result page when search without results occurred"() {
         given:
         homePage.searchForDev("java", "invalid-city")
@@ -56,6 +60,7 @@ class ExampleSpec extends Specification {
         resultPage.resultsAre(visible)
     }
 
+    @Repeat
     def "Should be able to sign in"() {
         when:
         homePage.signIn("company.dev.benchout@ttpsc.pl", "Passw0rd")
@@ -64,6 +69,7 @@ class ExampleSpec extends Specification {
         homePage.userProfileIconIs(visible)
     }
 
+    @Repeat
     def "Should be able to sign out"() {
         given:
         homePage.signInWithoutUI()
@@ -75,6 +81,7 @@ class ExampleSpec extends Specification {
         homePage.userProfileIconIs(notVisible)
     }
 
+    @Repeat
     def "Should open result page when browsing devs by category"() {
         when:
         homePage.searchForDevInCategory(category)
@@ -94,6 +101,7 @@ class ExampleSpec extends Specification {
                 "Mobile developers"]
     }
 
+    @Repeat
     def "Should add expert providing basic data"() {
         given:
         homePage.signInWithoutUI()
