@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static constants.Constants.DEFAULT_WAIT;
+import static constants.Constants.LONG_WAIT;
 
 public class AddExpertFormSelenide implements AddExpertForm {
 
@@ -23,7 +24,7 @@ public class AddExpertFormSelenide implements AddExpertForm {
 
     @Override
     public void skipSection(String section) {
-        nextButton.shouldBe(clickable).click();
+        nextButton.waitUntil(clickable, DEFAULT_WAIT).click();
         $(withText(section)).waitUntil(hidden, DEFAULT_WAIT);
     }
 
@@ -48,6 +49,6 @@ public class AddExpertFormSelenide implements AddExpertForm {
 
     @Override
     public boolean expertShouldBeShared() {
-        return sharedSuccessfullyMessage.waitUntil(visible, DEFAULT_WAIT) != null;
+        return sharedSuccessfullyMessage.waitUntil(visible, LONG_WAIT) != null;
     }
 }

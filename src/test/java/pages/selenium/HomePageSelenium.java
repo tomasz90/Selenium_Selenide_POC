@@ -100,7 +100,7 @@ public class HomePageSelenium extends BasePageSelenium implements HomePage {
     }
 
     public void signOut() {
-        getDriver().findElement(profileButton).click();
+        waitUntilPresent(profileButton, DEFAULT_WAIT).click();
         signOutButton.click();
     }
 

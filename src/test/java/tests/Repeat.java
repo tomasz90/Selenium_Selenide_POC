@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.TYPE})
 @ExtensionAnnotation(Repeat.RepeatExtension.class)
 public @interface Repeat {
-    int value() default 1;
+    int value() default 10;
 
 
     class RepeatExtension extends AbstractAnnotationDrivenExtension<Repeat> {
