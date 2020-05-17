@@ -15,11 +15,14 @@ import static tests.Util.makeUnique
 
 class ExampleSpec extends Specification {
 
-    private static String library = "selenium"
+    private static final String SELENIUM = "selenium"
+    private static final String SELENIDE = "selenide"
+    
+    private static final String LIBRARY = SELENIUM
 
-    private HomePage homePage = HomePageFactory.get(library)
-    private ResultPage resultPage = ResultPageFactory.get(library)
-    private AddExpertForm addExpertForm = AddExpertFormFactory.get(library)
+    private HomePage homePage = HomePageFactory.get(LIBRARY)
+    private ResultPage resultPage = ResultPageFactory.get(LIBRARY)
+    private AddExpertForm addExpertForm = AddExpertFormFactory.get(LIBRARY)
 
     private Condition notVisible = Condition.hidden
 
@@ -28,7 +31,7 @@ class ExampleSpec extends Specification {
     }
 
     def cleanupSpec() {
-        if (library == "selenium") {
+        if (LIBRARY == "selenium") {
         BasePage.close()
     }
 }

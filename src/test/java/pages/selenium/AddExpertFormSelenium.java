@@ -1,11 +1,13 @@
 package pages.selenium;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.factory.model.AddExpertForm;
 
+import static org.junit.Assert.assertEquals;
 import static util.Constants.DEFAULT_WAIT;
 
 public class AddExpertFormSelenium extends BasePage implements AddExpertForm {
@@ -28,7 +30,7 @@ public class AddExpertFormSelenium extends BasePage implements AddExpertForm {
     @FindBy(css = "esc-add-expert-controls .float-right [type=submit]") 
     private WebElement shareButton;
 
-    @FindBy(css = "") 
+    @FindBy(css = "esc-expert-share .container h2") 
     private WebElement sharedSuccessfullyMessage;
 
     @Override
@@ -55,16 +57,23 @@ public class AddExpertFormSelenium extends BasePage implements AddExpertForm {
     @Override
     public void fillRequiredSkills(String skill) {
         mainSkillsField.sendKeys(skill);
-        nextButton.click();
+        mainSkillsField.sendKeys(Keys.ENTER);
+        getWait(DEFAULT_WAIT)
+                .until(ExpectedConditions.elementToBeClickable(nextButton))
+                .click();
     }
 
     @Override
     public void share() {
-        shareButton.click();
+        getWait(DEFAULT_WAIT)
+                .until(ExpectedConditions.elementToBeClickable(shareButton))
+                .click();
     }
 
     @Override
     public void expertShouldBeShared() {
+        getWait(DEFAULT_WAIT).until(ExpectedConditions.visibilityOf(sharedSuccessfullyMessage));
         sharedSuccessfullyMessage.isDisplayed();
+        assertEquals("You shared expert successfully", sharedSuccessfullyMessage.getText());
     }
 }

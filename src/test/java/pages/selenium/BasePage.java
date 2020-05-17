@@ -2,17 +2,12 @@ package pages.selenium;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.DefaultElementLocator;
-import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.lang.reflect.InvocationHandler;
 
 import static util.Constants.DEFAULT_WAIT;
 
@@ -38,10 +33,10 @@ public abstract class BasePage extends PageFactory {
        return getWait(DEFAULT_WAIT).until(ExpectedConditions.visibilityOf(element));
     }
 
-    protected static WebElement findElementQuietly(By by, long timeOut) {
+    protected static WebElement findElementQuietly(By by, long timeOutInMs) {
         try {
-            WebElement element = new WebDriverWait(driver, timeOut).until(ExpectedConditions.presenceOfElementLocated(by));
-            return element;
+            return new WebDriverWait(driver, timeOutInMs / 1000)
+                    .until(ExpectedConditions.presenceOfElementLocated(by));
         } catch (Exception e) {
             return null;
         }
