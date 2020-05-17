@@ -12,11 +12,9 @@ import pages.factory.model.HomePage;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.visible;
-import static constants.Constants.*;
+import static util.Constants.*;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static tests.Constants.TOKEN;
-import static tests.Constants.TOKEN_VALUE;
 
 public class HomePageSelenium extends BasePageSelenium implements HomePage {
     

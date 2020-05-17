@@ -6,8 +6,8 @@ import pages.selenide.HomePageSelenide;
 import pages.selenium.HomePageSelenium;
 
 import static pages.selenium.BasePageSelenium.getDriver;
-import static constants.Constants.SELENIDE;
-import static constants.Constants.SELENIUM;
+import static util.Constants.SELENIDE;
+import static util.Constants.SELENIUM;
 
 public class HomePageFactory {
 

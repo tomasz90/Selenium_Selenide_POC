@@ -1,4 +1,4 @@
-package tests;
+package util;
 
 import org.spockframework.runtime.extension.AbstractAnnotationDrivenExtension;
 import org.spockframework.runtime.extension.AbstractMethodInterceptor;
@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.TYPE})
 @ExtensionAnnotation(Repeat.RepeatExtension.class)
 public @interface Repeat {
-    int value() default 10;
+    int value() default 1;
 
 
     class RepeatExtension extends AbstractAnnotationDrivenExtension<Repeat> {

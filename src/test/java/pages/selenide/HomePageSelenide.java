@@ -10,8 +10,8 @@ import pages.factory.model.HomePage;
 
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selenide.*;
-import static tests.Constants.TOKEN;
-import static tests.Constants.TOKEN_VALUE;
+import static util.Constants.TOKEN;
+import static util.Constants.TOKEN_VALUE;
 
 public class HomePageSelenide implements HomePage {
 

@@ -7,8 +7,8 @@ import pages.factory.model.AddExpertForm;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
-import static constants.Constants.DEFAULT_WAIT;
-import static constants.Constants.LONG_WAIT;
+import static util.Constants.DEFAULT_WAIT;
+import static util.Constants.LONG_WAIT;
 
 public class AddExpertFormSelenide implements AddExpertForm {
 

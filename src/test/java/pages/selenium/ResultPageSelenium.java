@@ -9,8 +9,8 @@ import pages.factory.model.ResultPage;
 import static com.codeborne.selenide.Condition.visible;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static constants.Constants.DEFAULT_WAIT;
-import static constants.Constants.SHORT_WAIT;
+import static util.Constants.DEFAULT_WAIT;
+import static util.Constants.SHORT_WAIT;
 
 public class ResultPageSelenium extends BasePageSelenium implements ResultPage {
 
