@@ -4,16 +4,15 @@ import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.factory.model.ResultPage;
 
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.visible;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static util.Constants.DEFAULT_WAIT;
 import static util.Constants.SHORT_WAIT;
 
-public class ResultPageSelenium extends BasePage implements ResultPage {
+public class ResultPageSelenium extends BasePageSelenium implements ResultPage {
 
     @FindBy(css = ".btn-filter span.lnr-cross")
     private WebElement clearFiltersButton;
@@ -25,7 +24,7 @@ public class ResultPageSelenium extends BasePage implements ResultPage {
 
     @Override
     public void isLoaded() {
-        getWait(DEFAULT_WAIT).until(ExpectedConditions.visibilityOf(searchForm));
+        waitUntilVisible(searchForm, DEFAULT_WAIT);
     }
 
     @Override

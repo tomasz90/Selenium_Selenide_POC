@@ -9,13 +9,16 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static util.Constants.DEFAULT_WAIT;
-
-public abstract class BasePage extends PageFactory {
+public abstract class BasePageSelenium extends PageFactory {
 
     private static WebDriver driver;
 
-   public static WebDriver getDriver() {
+    public static void close() {
+        getDriver().close();
+        driver = null;
+    }
+
+    public static WebDriver getDriver() {
         if (driver == null) {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
@@ -24,13 +27,22 @@ public abstract class BasePage extends PageFactory {
         return driver;
     }
 
-    public static void close() {
-        getDriver().close();
-        driver = null;
+    protected WebElement waitUntilVisible(WebElement element, int timeOutInMs) {
+        return getWait(timeOutInMs).until(ExpectedConditions.visibilityOf(element));
     }
-    
-    public WebElement waitUntilVisible(WebElement element) {
-       return getWait(DEFAULT_WAIT).until(ExpectedConditions.visibilityOf(element));
+
+    protected void waitUntilHidden(WebElement element, int timeOutInMs) {
+        getWait(timeOutInMs).until(ExpectedConditions.invisibilityOf(element));
+    }
+
+    protected WebElement waitUntilPresence(By by, int timeOutInMs) {
+        return getWait(timeOutInMs).until(ExpectedConditions.presenceOfElementLocated(by));
+    }
+
+    protected void clickWhenClickable(WebElement element, int timeOutInMs) {
+        getWait(timeOutInMs)
+                .until(ExpectedConditions.elementToBeClickable(element))
+                .click();
     }
 
     protected static WebElement findElementQuietly(By by, long timeOutInMs) {
@@ -42,7 +54,7 @@ public abstract class BasePage extends PageFactory {
         }
     }
 
-    static WebDriverWait getWait(int timeOutInMilliSec) {
+    private static WebDriverWait getWait(int timeOutInMilliSec) {
         return new WebDriverWait(driver, timeOutInMilliSec / 1000);
     }
 

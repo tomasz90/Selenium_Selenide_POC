@@ -5,7 +5,7 @@ import pages.factory.model.ResultPage;
 import pages.selenide.ResultPageSelenide;
 import pages.selenium.ResultPageSelenium;
 
-import static pages.selenium.BasePage.getDriver;
+import static pages.selenium.BasePageSelenium.getDriver;
 
 public class ResultPageFactory {
 

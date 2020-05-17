@@ -4,13 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.factory.model.AddExpertForm;
 
 import static org.junit.Assert.assertEquals;
 import static util.Constants.DEFAULT_WAIT;
 
-public class AddExpertFormSelenium extends BasePage implements AddExpertForm {
+public class AddExpertFormSelenium extends BasePageSelenium implements AddExpertForm {
+
+    private By loader = By.cssSelector(".addon.loader");
 
     @FindBy(id = "position") 
     private WebElement positionField;
@@ -33,47 +34,40 @@ public class AddExpertFormSelenium extends BasePage implements AddExpertForm {
     @FindBy(css = "esc-expert-share .container h2") 
     private WebElement sharedSuccessfullyMessage;
 
+    @FindBy(css = "[class=\"d-md-inline h5 ng-star-inserted\"]")
+    private WebElement sectionElement;
+
     @Override
     public void skipSection(String section) {
-        getWait(DEFAULT_WAIT)
-                .until(ExpectedConditions.elementToBeClickable(nextButton))
-                .click();
-        WebElement sectionElement = getDriver().findElement(By.cssSelector("[class=\"d-md-inline h5 ng-star-inserted\"]"));
+        clickWhenClickable(nextButton, DEFAULT_WAIT);
         if(sectionElement.getText().equals(section)) {
-            getWait(DEFAULT_WAIT)
-                    .until(ExpectedConditions.invisibilityOf(sectionElement));
+            waitUntilHidden(sectionElement, DEFAULT_WAIT);
         }
     }
 
     @Override
     public void fillRequiredBasics(String position, String name) {
-        getWait(DEFAULT_WAIT).until(ExpectedConditions.visibilityOf(positionField)).sendKeys(position);
+        waitUntilVisible(positionField, DEFAULT_WAIT).sendKeys(position);
         nameField.sendKeys(name);
-        WebElement loader = getWait(DEFAULT_WAIT).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".addon.loader")));
-        getWait(DEFAULT_WAIT).until(ExpectedConditions.invisibilityOf(loader));
+        WebElement loaderElement = waitUntilPresence(loader, DEFAULT_WAIT);
+        waitUntilHidden(loaderElement, DEFAULT_WAIT);
         skipSection("Basic data");
     }
 
     @Override
     public void fillRequiredSkills(String skill) {
-        mainSkillsField.sendKeys(skill);
-        mainSkillsField.sendKeys(Keys.ENTER);
-        getWait(DEFAULT_WAIT)
-                .until(ExpectedConditions.elementToBeClickable(nextButton))
-                .click();
+        mainSkillsField.sendKeys(skill, Keys.ENTER);
+        clickWhenClickable(nextButton, DEFAULT_WAIT);
     }
 
     @Override
     public void share() {
-        getWait(DEFAULT_WAIT)
-                .until(ExpectedConditions.elementToBeClickable(shareButton))
-                .click();
+        clickWhenClickable(shareButton, DEFAULT_WAIT);
     }
 
     @Override
     public void expertShouldBeShared() {
-        getWait(DEFAULT_WAIT).until(ExpectedConditions.visibilityOf(sharedSuccessfullyMessage));
-        sharedSuccessfullyMessage.isDisplayed();
+        waitUntilVisible(sharedSuccessfullyMessage, DEFAULT_WAIT);
         assertEquals("You shared expert successfully", sharedSuccessfullyMessage.getText());
     }
 }

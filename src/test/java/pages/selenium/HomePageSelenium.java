@@ -15,11 +15,16 @@ import static com.codeborne.selenide.Condition.visible;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static tests.Constants.TOKEN_VALUE;
+import static util.Constants.DEFAULT_WAIT;
 import static util.Constants.SHORT_WAIT;
 
-public class HomePageSelenium extends BasePage implements HomePage {
+public class HomePageSelenium extends BasePageSelenium implements HomePage {
     
     private By acceptCookieButton = By.cssSelector("esc-cookie-alert button");
+
+    private By profileButton = By.cssSelector("esc-nav-bar-desktop-dropdown button img");
+
+    private By addExpertsButton = By.cssSelector(".btn[ng-reflect-authorities=MODIFY_EXPERTS]");
 
     @FindBy(css = "[type=submit]")
     private WebElement searchButton;
@@ -32,11 +37,6 @@ public class HomePageSelenium extends BasePage implements HomePage {
     
     @FindBy(css = "button.btn-logout")
     private WebElement signOutButton;
-    
-    private By profileButton = By.cssSelector("esc-nav-bar-desktop-dropdown button img");
-    
-    @FindBy(css = ".btn[ng-reflect-authorities=MODIFY_EXPERTS]")
-    private WebElement addExpertsButton;
 
     @FindBy(id = "who-search")
     private WebElement techField;
@@ -107,6 +107,6 @@ public class HomePageSelenium extends BasePage implements HomePage {
     }
 
     public void addExpert() {
-        addExpertsButton.click();
+        waitUntilPresence(addExpertsButton, DEFAULT_WAIT).click();
     }
 }

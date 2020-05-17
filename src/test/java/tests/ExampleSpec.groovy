@@ -7,7 +7,7 @@ import pages.factory.ResultPageFactory
 import pages.factory.model.AddExpertForm
 import pages.factory.model.HomePage
 import pages.factory.model.ResultPage
-import pages.selenium.BasePage
+import pages.selenium.BasePageSelenium
 import spock.lang.Specification
 
 import static com.codeborne.selenide.Condition.visible
@@ -32,7 +32,7 @@ class ExampleSpec extends Specification {
 
     def cleanupSpec() {
         if (LIBRARY == "selenium") {
-        BasePage.close()
+        BasePageSelenium.close()
     }
 }
 

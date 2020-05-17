@@ -5,7 +5,7 @@ import pages.factory.model.HomePage;
 import pages.selenide.HomePageSelenide;
 import pages.selenium.HomePageSelenium;
 
-import static pages.selenium.BasePage.getDriver;
+import static pages.selenium.BasePageSelenium.getDriver;
 
 public class HomePageFactory {
 

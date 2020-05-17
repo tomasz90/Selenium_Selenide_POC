@@ -4,9 +4,8 @@ import org.openqa.selenium.support.PageFactory;
 import pages.factory.model.AddExpertForm;
 import pages.selenide.AddExpertFormSelenide;
 import pages.selenium.AddExpertFormSelenium;
-import pages.selenium.HomePageSelenium;
 
-import static pages.selenium.BasePage.getDriver;
+import static pages.selenium.BasePageSelenium.getDriver;
 
 public class AddExpertFormFactory {
 
