@@ -6,14 +6,16 @@ import pages.selenide.AddExpertFormSelenide;
 import pages.selenium.AddExpertFormSelenium;
 
 import static pages.selenium.BasePageSelenium.getDriver;
+import static constants.Constants.SELENIDE;
+import static constants.Constants.SELENIUM;
 
 public class AddExpertFormFactory {
 
     public static AddExpertForm get(String library) {
         switch (library) {
-            case "selenide":
+            case SELENIDE:
                 return new AddExpertFormSelenide();
-            case "selenium":
+            case SELENIUM:
                 return PageFactory.initElements(getDriver(), AddExpertFormSelenium.class);
         }
         return null;

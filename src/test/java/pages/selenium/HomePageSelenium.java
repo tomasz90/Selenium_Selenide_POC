@@ -16,15 +16,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static tests.Constants.TOKEN;
 import static tests.Constants.TOKEN_VALUE;
-import static util.Constants.DEFAULT_WAIT;
-import static util.Constants.SHORT_WAIT;
+import static constants.Constants.DEFAULT_WAIT;
+import static constants.Constants.SHORT_WAIT;
 
 public class HomePageSelenium extends BasePageSelenium implements HomePage {
     
     private By acceptCookieButton = By.cssSelector("esc-cookie-alert button");
-
     private By profileButton = By.cssSelector("esc-nav-bar-desktop-dropdown button img");
-
     private By addExpertsButton = By.cssSelector(".btn[ng-reflect-authorities=MODIFY_EXPERTS]");
 
     @FindBy(css = "[type=submit]")
@@ -56,7 +54,7 @@ public class HomePageSelenium extends BasePageSelenium implements HomePage {
 
     public void navigate() {
         getDriver().navigate().to("http://esc.tt.com.pl/");
-        WebElement accept = findElementQuietly(acceptCookieButton, 1);
+        WebElement accept = findElementQuietly(acceptCookieButton, 500);
         if (accept != null) {
            accept.click();
         }

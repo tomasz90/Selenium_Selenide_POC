@@ -6,8 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.factory.model.AddExpertForm;
 
-import static org.junit.Assert.assertEquals;
-import static util.Constants.DEFAULT_WAIT;
+import static constants.Constants.DEFAULT_WAIT;
 
 public class AddExpertFormSelenium extends BasePageSelenium implements AddExpertForm {
 

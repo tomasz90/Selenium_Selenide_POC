@@ -7,19 +7,16 @@ import pages.factory.model.AddExpertForm;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
-import static util.Constants.DEFAULT_WAIT;
+import static constants.Constants.DEFAULT_WAIT;
 
 public class AddExpertFormSelenide implements AddExpertForm {
 
     private SelenideElement positionField = $(byId("position"));
     private SelenideElement nameField = $(byId("displayedName"));
     private SelenideElement mainSkillsField = $(byId("mainSkills"));
-    
     private SelenideElement nameFieldLoader = $(".addon.loader");
-    
     private SelenideElement nextButton = $("[type=submit]");
     private SelenideElement shareButton = $("esc-add-expert-controls .float-right [type=submit]");
-    
     private SelenideElement sharedSuccessfullyMessage = $(byText("You shared expert successfully"));
 
     private Condition clickable = and("can be clicked", visible, enabled);

@@ -6,14 +6,16 @@ import pages.selenide.ResultPageSelenide;
 import pages.selenium.ResultPageSelenium;
 
 import static pages.selenium.BasePageSelenium.getDriver;
+import static constants.Constants.SELENIDE;
+import static constants.Constants.SELENIUM;
 
 public class ResultPageFactory {
 
     public static ResultPage get(String library) {
         switch (library) {
-            case "selenide":
+            case SELENIDE:
                 return new ResultPageSelenide();
-            case "selenium":
+            case SELENIUM:
                 return PageFactory.initElements(getDriver(), ResultPageSelenium.class);
         }
         return null;

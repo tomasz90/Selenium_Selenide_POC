@@ -11,14 +11,12 @@ import pages.selenium.BasePageSelenium
 import spock.lang.Specification
 
 import static com.codeborne.selenide.Condition.visible
+import static constants.Constants.SELENIDE
 import static tests.Util.makeUnique
 
 class ExampleSpec extends Specification {
-
-    private static final String SELENIUM = "selenium"
-    private static final String SELENIDE = "selenide"
     
-    private static final String LIBRARY = SELENIUM
+    private static final String LIBRARY = SELENIDE
 
     private HomePage homePage = HomePageFactory.get(LIBRARY)
     private ResultPage resultPage = ResultPageFactory.get(LIBRARY)
