@@ -1,6 +1,6 @@
 package tests
 
-import com.codeborne.selenide.Condition
+
 import pages.factory.AddExpertFormFactory
 import pages.factory.HomePageFactory
 import pages.factory.ResultPageFactory
@@ -12,8 +12,9 @@ import spock.lang.Specification
 import util.Repeat
 
 import static com.codeborne.selenide.Condition.visible
-import static util.Constants.SELENIUM
 import static tests.Util.makeUnique
+import static util.Constants.NOT_VISIBLE
+import static util.Constants.SELENIUM
 
 class ExampleSpec extends Specification {
 
@@ -22,8 +23,6 @@ class ExampleSpec extends Specification {
     private HomePage homePage = HomePageFactory.get(LIBRARY)
     private ResultPage resultPage = ResultPageFactory.get(LIBRARY)
     private AddExpertForm addExpertForm = AddExpertFormFactory.get(LIBRARY)
-
-    private Condition notVisible = Condition.hidden
 
     def setup() {
         homePage.navigate()
@@ -51,7 +50,7 @@ class ExampleSpec extends Specification {
         given:
         homePage.searchForDev("java", "invalid-city")
         resultPage.isLoaded()
-        resultPage.resultsAre(notVisible)
+        resultPage.resultsAre(NOT_VISIBLE)
 
         when:
         resultPage.clearFilters()
@@ -78,7 +77,7 @@ class ExampleSpec extends Specification {
         homePage.signOut()
 
         then:
-        homePage.userProfileIconIs(notVisible)
+        homePage.userProfileIconIs(NOT_VISIBLE)
     }
 
     @Repeat
