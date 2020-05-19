@@ -12,7 +12,7 @@ import spock.lang.Specification
 import util.Repeat
 
 import static com.codeborne.selenide.Condition.visible
-import static tests.Util.makeUnique
+import static util.Util.makeUnique
 import static util.Constants.NOT_VISIBLE
 import static util.Constants.SELENIUM
 
