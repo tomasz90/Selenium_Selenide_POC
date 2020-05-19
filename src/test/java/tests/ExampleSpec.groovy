@@ -16,8 +16,16 @@ import static tests.Util.makeUnique
 import static util.Constants.NOT_VISIBLE
 import static util.Constants.SELENIUM
 
+/**
+ * This test class can be used with both frameworks/libraries selenium and selenide.
+ * To decide which framework will be used in this suite, just specify LIBRARY constant.
+ * Every test method in this suite has annotation @Repeat - this allows to run test method multiple time.
+ * This can be set inside Repeat interface for all methods or can be set for specific method like @Repeat(nTimes)
+ * It is useful to check how stable tests are. Please note that in most cases assertions are inside page objects, 
+ * because it was easier to implement "generic" solution for both frameworks.
+ */
 class ExampleSpec extends Specification {
-
+    
     private static final String LIBRARY = SELENIUM
 
     private HomePage homePage = HomePageFactory.get(LIBRARY)
